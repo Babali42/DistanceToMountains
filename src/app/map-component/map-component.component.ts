@@ -9,7 +9,7 @@ import * as olProj from 'ol/proj';
 import TileLayer from 'ol/layer/Tile';
 import { defaults as defaultControls, OverviewMap } from 'ol/control';
 import * as olCoordinates from 'ol/coordinate';
-import MousePosition from 'ol/control/mouseposition';
+import MousePosition from 'ol/control/MousePosition';
 
 @Component({
   selector: 'app-map-component',

@@ -1,5 +1,52 @@
 <p>map-component works!</p>
-<div class="row">
-    <div id="hotel_map" (click)="clickMap($event)"></div>
-    <div id="myposition"></div>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="container">
+                <h1>Ajout ou édition d'un lieux</h1>
+                <form #placeForm="ngForm" appIdentityRevealed>
+                  <div [hidden]="placeForm.submitted">
+                    <div class="cross-validation" [class.cross-validation-error]="placeForm.errors?.identityRevealed && (placeForm.touched || placeForm.dirty)">
+                      <div class="form-group">
+                        <label for="name">Nom</label>
+                        <input id="name" name="name" class="form-control" [(ngModel)]="place.name">
+                      </div>
+                      <div class="form-group">
+                        <label for="altitude">Altitude</label>
+                        <input id="altitude" name="altitude" class="form-control" [(ngModel)]="place.altitude">
+                      </div>
+                      <div class="form-group">
+                        <label for="lat">Latitude</label>
+                        <input id="lat" name="lat" class="form-control" [(ngModel)]="place.lat">
+                      </div>
+                      <div class="form-group">
+                        <label for="long">Longitude</label>
+                        <input id="long" name="long" class="form-control" [(ngModel)]="place.long">
+                      </div>
+                      <div class="form-group">
+                        <label for="range">Massif</label>
+                        <input id="range" name="range" class="form-control" [(ngModel)]="place.range">
+                      </div>
+                      <div class="form-group">
+                        <label for="country">Pays</label>
+                        <input id="country" name="country" class="form-control" [(ngModel)]="place.country">
+                      </div>
+                      <div class="form-group">
+                        <label for="description">Description</label>
+                        <input id="description" name="country" class="form-control" [(ngModel)]="place.description">
+                      </div>
+                      <div class="form-group">
+                        <label for="verified">Vérifié</label>
+                        <input id="verified" name="country" class="form-control" [(ngModel)]="place.verified">
+                      </div>
+                    </div>
+                  </div>
+                </form>
+            </div>
+        </div>
+        <div class="col">
+            <div id="place_map" (click)="clickMap($event)"></div>
+            <div id="myposition" #selectedPosition></div>
+        </div>
+    </div>
 </div>

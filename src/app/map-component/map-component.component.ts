@@ -1,15 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import Map from 'ol/Map';
 import View from 'ol/View';
-import VectorLayer from 'ol/layer/Vector';
-import Style from 'ol/style/Style';
-import Icon from 'ol/style/Icon';
 import OSM from 'ol/source/OSM';
 import * as olProj from 'ol/proj';
 import TileLayer from 'ol/layer/Tile';
-import { defaults as defaultControls, OverviewMap } from 'ol/control';
 import * as olCoordinates from 'ol/coordinate';
 import MousePosition from 'ol/control/MousePosition';
+import {defaults as defaultInteractions, DragRotateAndZoom} from 'ol/interaction';
+import { Place } from '../places/place';
 
 @Component({
   selector: 'app-map-component',
@@ -20,29 +18,16 @@ export class MapComponentComponent implements OnInit {
 
   constructor() { }
 
+  @ViewChild('selectedPosition') selectedPositionDiv: ElementRef;
   private map;
   private mousePosition;
-  private overviewMapControl;
-  private source;
+  public place;
 
   ngOnInit(): void {
-    console.log("INIT");
-
-    this.source = new OSM();
-    this.overviewMapControl = new OverviewMap({
-      layers: [
-        new TileLayer({
-          source: this.source
-        })
-      ]
-    });
-
-
-
     this.map = new Map({
-      target: 'hotel_map',
-      controls: defaultControls().extend([
-        this.overviewMapControl
+      target: 'place_map',
+      interactions: defaultInteractions().extend([
+        new DragRotateAndZoom()
       ]),
       layers: [
         new TileLayer({
@@ -54,23 +39,21 @@ export class MapComponentComponent implements OnInit {
         zoom: 5
       }),
     });
-    
 
     this.mousePosition = new MousePosition({
-      coordinateFormat: olCoordinates.createStringXY(2),
+      coordinateFormat: olCoordinates.createStringXY(4),
       projection: 'EPSG:4326',
       target: document.getElementById('myposition'),
       undefinedHTML: '&nbsp;'
     });
   
     this.map.addControl(this.mousePosition);
+    this.place = new Place({name:"Roche des vents"});
   }
 
   clickMap(event:any):void{
-    console.log(event);
-    console.log(this.mousePosition);
+    const coordinates = this.selectedPositionDiv.nativeElement.innerText.split(', ');
+    this.place.long = coordinates[0];
+    this.place.lat = coordinates[1];
   }
-
-  
-
 }

@@ -1,12 +1,15 @@
 export class Place {
     _id?: string;
     name: string;
-    description: string;
-    url: string;
+    altitude: number;
     lat: number;
-    long: string;
-    verified: boolean;
+    long: number;
     range: string;
     country: string;
-    altitude: number;
-  }
+    description: string;
+    verified: boolean;
+
+    public constructor(init?:Partial<Place>) {
+      Object.assign(this, init);
+    }
+}

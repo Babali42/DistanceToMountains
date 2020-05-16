@@ -1,8 +1,7 @@
-<p>map-component works!</p>
-<div class="container">
+<div class="container-fluid">
     <div class="row">
-        <div class="col">
-            <div class="container">
+        <div class="col-md-6">
+            
                 <h1>Ajout ou édition d'un lieux</h1>
                 <form #placeForm="ngForm" appIdentityRevealed>
                   <div [hidden]="placeForm.submitted">
@@ -42,11 +41,11 @@
                     </div>
                   </div>
                 </form>
-            </div>
+            
         </div>
-        <div class="col">
+        <div class="col-md-6">
             <div id="place_map" (click)="clickMap($event)"></div>
-            <div id="myposition" #selectedPosition></div>
+            <div id="myposition" #selectedPosition [hidden]="true"></div>
         </div>
     </div>
 </div>

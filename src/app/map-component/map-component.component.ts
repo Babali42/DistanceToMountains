@@ -26,9 +26,7 @@ export class MapComponentComponent implements OnInit {
   ngOnInit(): void {
     this.map = new Map({
       target: 'place_map',
-      interactions: defaultInteractions().extend([
-        new DragRotateAndZoom()
-      ]),
+      interactions: defaultInteractions(),
       layers: [
         new TileLayer({
           source: new OSM()
